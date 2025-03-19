@@ -1,2 +1,2 @@
 # climateCrises
-groupWork
+A website about the climate crisis

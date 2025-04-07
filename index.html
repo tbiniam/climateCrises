@@ -1,688 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Learn about the climate crisis and how you can help protect our planet">
-  <title>Climate Crisis Awareness - Act Now for Our Planet</title>
-  <style>
-    :root {
-      --primary-color: #2e7d32;
-      --primary-dark: #1b5e20;
-      --primary-light: #81c784;
-      --text-light: #ffffff;
-      --text-dark: #333333;
-      --background-light: #f5f5f5;
-      --background-white: #ffffff;
-      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --border-radius: 8px;
-      --transition: all 0.3s ease;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      background-color: var(--background-light);
-      color: var(--text-dark);
-      padding-top: 80px;
-      min-height: 100vh;
-      position: relative;
-      padding-bottom: 60px;
-    }
-
-    /* Skip to content link for keyboard users */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--primary-color);
-      color: var(--text-light);
-      padding: 8px;
-      z-index: 100;
-      transition: var(--transition);
-    }
-
-    .skip-link:focus {
-      top: 0;
-    }
-
-    /* Header styles */
-    header {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-      color: var(--text-light);
-      padding: 0 20px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 15px 0;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: var(--text-light);
-      transition: var(--transition);
-    }
-
-    .logo:hover {
-      transform: translateY(-2px);
-    }
-
-    .logo img {
-      height: 45px;
-      width: 45px;
-      margin-right: 15px;
-      transition: var(--transition);
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-    }
-
-    .logo:hover img {
-      transform: rotate(15deg) scale(1.1);
-    }
-
-    .logo h1 {
-      font-size: 1.8em;
-      margin: 0;
-      font-weight: 700;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Navigation styles */
-    nav {
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-    }
-
-    .nav-links li {
-      position: relative;
-    }
-
-    .nav-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      padding: 10px 20px;
-      display: block;
-      font-weight: 500;
-      transition: var(--transition);
-      border-radius: 30px;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus {
-      background-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
-
-    .nav-links a.active {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Beautiful Hamburger Menu */
-    .menu-toggle-container {
-      display: none;
-      position: relative;
-      z-index: 1100;
-    }
-
-    .menu-toggle {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 40px;
-      height: 30px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      position: relative;
-      z-index: 1100;
-    }
-
-    .menu-toggle:focus {
-      outline: 2px solid var(--text-light);
-      outline-offset: 3px;
-    }
-
-    .menu-toggle-line {
-      width: 100%;
-      height: 4px;
-      background-color: var(--text-light);
-      border-radius: 2px;
-      transition: var(--transition);
-      transform-origin: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Menu overlay styles */
-    .menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(27, 94, 32, 0.95);
-      backdrop-filter: blur(5px);
-      z-index: 1050;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .menu-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .menu-overlay-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 500px;
-      padding: 40px;
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
-    }
-
-    .menu-overlay.open .menu-overlay-content {
-      transform: translateY(0);
-    }
-
-    .menu-overlay-links {
-      list-style: none;
-      width: 100%;
-    }
-
-    .menu-overlay-links li {
-      margin-bottom: 20px;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .menu-overlay.open .menu-overlay-links li {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Staggered animation for menu items */
-    .menu-overlay.open .menu-overlay-links li:nth-child(1) {
-      transition-delay: 0.1s;
-    }
-    .menu-overlay.open .menu-overlay-links li:nth-child(2) {
-      transition-delay: 0.2s;
-    }
-    .menu-overlay.open .menu-overlay-links li:nth-child(3) {
-      transition-delay: 0.3s;
-    }
-    .menu-overlay.open .menu-overlay-links li:nth-child(4) {
-      transition-delay: 0.4s;
-    }
-    .menu-overlay.open .menu-overlay-links li:nth-child(5) {
-      transition-delay: 0.5s;
-    }
-
-    .menu-overlay-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 1.5em;
-      font-weight: 600;
-      padding: 12px 20px;
-      display: inline-block;
-      position: relative;
-      transition: var(--transition);
-    }
-
-    .menu-overlay-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      width: 0;
-      height: 3px;
-      background: var(--text-light);
-      transition: var(--transition);
-      transform: translateX(-50%);
-    }
-
-    .menu-overlay-links a:hover::after,
-    .menu-overlay-links a:focus::after {
-      width: 80%;
-    }
-
-    .menu-overlay-links a.active {
-      color: var(--primary-light);
-    }
-
-    .menu-overlay-links a.active::after {
-      background: var(--primary-light);
-      width: 80%;
-    }
-
-    /* Menu toggle animation when open */
-    .menu-toggle.open .menu-toggle-line:nth-child(1) {
-      transform: translateY(13px) rotate(45deg);
-      background-color: var(--text-light);
-    }
-
-    .menu-toggle.open .menu-toggle-line:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-toggle.open .menu-toggle-line:nth-child(3) {
-      transform: translateY(-13px) rotate(-45deg);
-      background-color: var(--text-light);
-    }
-
-    /* Main content styles */
-    main {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 40px;
-      background: var(--background-white);
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-      transform: translateY(0);
-      transition: var(--transition);
-    }
-
-    main:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    h1, h2 {
-      color: var(--primary-dark);
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      line-height: 1.2;
-      text-align: center;
-      margin-bottom: 30px;
-      color: var(--primary-dark);
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      font-size: 1.8em;
-      margin-top: 30px;
-    }
-
-    p {
-      font-size: 1.1em;
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .highlight {
-      background: linear-gradient(120deg, var(--primary-light) 0%, var(--primary-color) 100%);
-      padding: 2px 8px;
-      border-radius: 6px;
-      color: var(--text-light);
-      font-weight: 600;
-    }
-
-    /* Slideshow styles */
-    .slideshow-container {
-      max-width: 1000px;
-      margin: 30px auto;
-      position: relative;
-    }
-
-    .slideshow {
-      display: flex;
-      gap: 15px;
-      overflow-x: auto;
-      padding: 15px 0;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .slideshow::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .slideshow::-webkit-scrollbar-track {
-      background: var(--background-light);
-    }
-
-    .slideshow::-webkit-scrollbar-thumb {
-      background-color: var(--primary-light);
-      border-radius: 4px;
-    }
-
-    .slideshow img {
-      width: 300px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      flex-shrink: 0;
-      transition: var(--transition);
-    }
-
-    .slideshow img:hover {
-      transform: scale(1.02);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Action buttons */
-    .action-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 30px 0;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 28px;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-      color: var(--text-light);
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1.1em;
-      font-weight: 600;
-      transition: var(--transition);
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
-    }
-
-    .btn:hover, .btn:focus {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
-    }
-
-    .btn-secondary {
-      background: linear-gradient(135deg, var(--background-white), var(--background-light));
-      color: var(--primary-dark);
-      border: 2px solid var(--primary-color);
-    }
-
-    .btn-secondary:hover, .btn-secondary:focus {
-      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-      color: var(--text-light);
-      border-color: transparent;
-    }
-
-    /* Footer styles */
-    footer {
-      text-align: center;
-      padding: 20px 0;
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-      color: var(--text-light);
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    footer p {
-      margin: 0;
-      font-size: 1em;
-      font-weight: 500;
-    }
-
-    footer a {
-      color: var(--text-light);
-      text-decoration: none;
-      transition: var(--transition);
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-
-    footer a:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 992px) {
-      .nav-links {
-        display: none;
-      }
-
-      .menu-toggle-container {
-        display: block;
-      }
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding-top: 60px;
-      }
-      
-      header {
-        padding: 0 15px;
-      }
-      
-      .logo h1 {
-        font-size: 1.3em;
-      }
-      
-      main {
-        padding: 20px;
-        margin: 0 15px 30px;
-      }
-      
-      h1 {
-        font-size: 1.8em;
-      }
-      
-      .slideshow img {
-        width: 250px;
-        height: 150px;
-      }
-      
-      .action-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .btn {
-        width: 100%;
-        max-width: 300px;
-      }
-
-      .menu-overlay-links a {
-        font-size: 1.3em;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding-top: 60px;
-      }
-      
-      .logo img {
-        height: 30px;
-        width: 30px;
-        margin-right: 10px;
-      }
-      
-      .logo h1 {
-        font-size: 1.2em;
-      }
-      
-      main {
-        padding: 15px;
-        margin: 0 10px 30px;
-      }
-      
-      h1 {
-        font-size: 1.5em;
-      }
-      
-      p {
-        font-size: 1em;
-      }
-
-      .menu-toggle {
-        width: 35px;
-        height: 25px;
-      }
-
-      .menu-toggle-line {
-        height: 3px;
-      }
-
-      .menu-overlay-links a {
-        font-size: 1.2em;
-        padding: 10px 15px;
-      }
-    }
-
-    /* Focus styles for accessibility */
-    a:focus,
-    button:focus,
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: 2px solid var(--primary-dark);
-      outline-offset: 2px;
-    }
-
-    /* Reduced motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Climate Crisis Awareness</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --light: #fff;
+            --dark: #333;
+            --bg-light: #f5f5f5;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --trans: all 0.3s ease;
+            --primary-dark: #1b5e20;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg-light);
+            color: var(--dark);
+            padding-top: 120px;
+            padding-bottom: 60px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: var(--light);
+            padding: 8px;
+            z-index: 100;
+            transition: var(--trans);
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--light);
+            box-shadow: var(--shadow);
+            transition: height 0.3s ease, box-shadow 0.3s ease;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        header.compact {
+            height: 100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            height: fit-content;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-top {
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: padding 0.3s ease;
+        }
+
+        header.compact .header-top {
+            padding: 5px 0;
+            height: 100px;
+        }
+
+        .header-bottom {
+            height: auto;
+            padding: 1px 0;
+            text-align: center;
+            opacity: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(0);
+        }
+
+        header.compact .header-bottom {
+            opacity: 0;
+            transform: translateY(-20px);
+            height: 10;
+            padding: 0;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-icon {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            box-shadow: var(--shadow);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 4px 0;
+            border-radius: 2px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 45px;
+            width: 45px;
+            margin-right: 10px;
+        }
+
+        .logo:hover img {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: var(--trans);
+        }
+
+        nav a:hover,
+        nav a:focus,
+        nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 40px;
+            background: var(--light);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+
+        p,
+        li {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #81c784 0%, var(--primary) 100%);
+            padding: 2px 8px;
+            border-radius: 6px;
+            color: var(--light);
+            font-weight: 600;
+        }
+
+        .slideshow {
+            display: flex;
+            width: fit-content;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 15px;
+            scroll-behavior: smooth;
+        }
+
+        .slideshow img {
+            width: 100%;
+            max-width: 300px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--trans);
+        }
+
+        .slideshow img:hover {
+            transform: scale(1.05);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--light);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+            transition: var(--trans);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            box-shadow: 0 8px 30px rgba(46, 125, 50, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--light);
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: inline;
+            }
+
+            nav ul {
+                flex-direction: column;
+                background: var(--primary);
+                position: absolute;
+                right: 20px;
+                top: 60px;
+                display: none;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header role="banner">
-    <div class="header-container">
-      <a href="#" class="logo" aria-label="Climate Crisis Home">
-        <img src="https://cdn-icons-png.flaticon.com/512/1584/1584892.png" alt="" aria-hidden="true">
-        <h1>Climate Crisis</h1>
-      </a>
-      
-      <nav aria-label="Main navigation">
-        <ul class="nav-links">
-          <li><a href="#" class="active">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Solutions</a></li>
-          <li><a href="#">Gallery</a></li>
-          <li><a href="#">Contact</a></li>
+    <header id="header">
+        <div class="header-container">
+            <div class="header-top">
+                <a href="#" class="logo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1584/1584892.png" alt="Logo">
+                    <h1>Climate Crisis</h1>
+                </a>
+                <div class="header-right">
+                    <img src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=1380" alt="Profile"
+                        class="profile-icon">
+                    <div class="hamburger" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-bottom">
+                <nav>
+                    <ul>
+                        <li><a href="#" >Home</a></li>
+                        <li><a href="#" >About</a></li>
+                        <li><a href=" #" >Solutions</a></li>
+                        <li><a href="#" >Gallery</a></li>
+                        <li><a href="#" >Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <h1>Act Now for Our Planet</h1>
+        <p>The <span class="highlight">climate crisis</span> is a global emergency. Rising temperatures, extreme
+            weather, and biodiversity loss are serious issues we must act on.</p>
+        <p>The <span class="highlight">climate change</span> is real and urgent. Human activity, especially burning
+            fossil fuels, is heating our planet at an alarming pace.</p>
+
+        <h1>What's Happening?</h1>
+        <p>Increased global temperatures are causing:</p>
+        <ul>
+            <li><span class="highlight">Melting ice caps</span> → rising sea levels</li>
+            <li><span class="highlight">Droughts, wildfires, floods</span> → more severe and frequent</li>
+            <li><span class="highlight">Threatened wildlife</span> → ecosystem collapse</li>
+            <li><span class="highlight">Human health risks</span> → heatwaves, pollution, food insecurity</li>
         </ul>
-      </nav>
-      
-      <div class="menu-toggle-container">
-        <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-          <span class="menu-toggle-line"></span>
-          <span class="menu-toggle-line"></span>
-          <span class="menu-toggle-line"></span>
-        </button>
-      </div>
-    </div>
-  </header>
 
-  <!-- Menu Overlay -->
-  <div class="menu-overlay" id="menu-overlay">
-    <div class="menu-overlay-content">
-      <ul class="menu-overlay-links">
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Solutions</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-  </div>
+        <p>Every small action counts. Join us in making a difference!</p>
 
-  <main id="main-content" class="container" role="main">
-    <h1>Act Now for Our Planet</h1>
-    <p>
-      The <span class="highlight">climate crisis</span> is a global emergency that affects everyone. Rising temperatures, extreme weather events, and the loss of biodiversity 
-      are just a few of the consequences of inaction. Together, we can mitigate these impacts by embracing renewable energy, reducing waste, 
-      and fostering sustainable practices.
-    </p>
-	<p>
-		The <span class="highlight">climate change</span> is no longer a distant threat — it's here, and it's affecting every corner of our planet. 
-		From rising sea levels to extreme weather events, the signs are all around us. The science is clear: human activity, particularly the burning of fossil fuels, is warming
-		 our planet at an alarming rate.
-	  </p>
-	  <h1> What’s Happening? </h1>
-		<p> Over the last century, global temperatures have steadily increased, leading to devastating consequences</p>
-	  <p>
-		<span class="highlight">Human health</span> is at risk due to heatwaves, poor air quality, and food insecurity.<br>	 
-		<span class="highlight">Ecosystems and wildlife</span> are under immense pressure, with many species facing extinction. <br>
-		<span class="highlight">Melting ice caps and glaciers</span> are contributing to rising sea levels, threatening coastal communities.<br>
-		<span class="highlight">Droughts, wildfires, and floods</span> are becoming more frequent and more severe. <br>
-	  </p>
-    <p>
-      Every action counts, no matter how small. Join the movement to protect our planet for future generations.
-    </p>
+        <div class="action-buttons">
+            <a href="#" class="btn">Learn More</a>
+            <a href="#" class="btn btn-secondary">Take Action</a>
+        </div>
 
-    <div class="action-buttons">
-      <a href="#" class="btn">Learn More</a>
-      <a href="#" class="btn btn-secondary">Take Action</a>
-    </div>
+        <h2>Climate Impact Gallery</h2>
+        <div class="slideshow-container">
+            <div class="slideshow" id="slideshow">
+                <img src="https://images.unsplash.com/photo-1615751072497-5f5169febe17?w=600" alt="Melting glaciers">
+                <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600" alt="Dry farmland">
+                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Forest wildfire">
+                <img src="https://images.unsplash.com/photo-1506773090264-ac0b07293a64?w=600" alt="Urban flooding">
+                <img src="https://images.unsplash.com/photo-1473260079709-83c808703435?w=600" alt="Wildfire aftermath">
+            </div>
+        </div>
 
-    <h2>Climate Impact Gallery</h2>
-    <div class="slideshow-container">
-      <div class="slideshow" role="region" aria-label="Climate impact images">
-        <img src="https://images.unsplash.com/photo-1615751072497-5f5169febe17?w=600&auto=format" alt="Melting glaciers in the Arctic">
-        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600&auto=format" alt="Drought affecting farmland">
-        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format" alt="Wildfire spreading through a forest">
-        <img src="https://images.unsplash.com/photo-1506773090264-ac0b07293a64?w=600&auto=format" alt="Flooding in urban area">
-		<img src ="https://images.unsplash.com/photo-1473260079709-83c808703435?w=600&auto=forma" alt = "Recent wildfire">
-      </div>
-    </div>
+        <section>
+            <h2>What You Can Do</h2>
+            <p>Make a difference with these actions:</p>
+            <ul>
+                <li>Use public transport or bike</li>
+                <li>Conserve energy at home</li>
+                <li>Support eco-friendly businesses</li>
+                <li>Reduce, reuse, recycle</li>
+                <li>Advocate for climate policies</li>
+            </ul>
+        </section>
+    </main>
 
-    <section aria-labelledby="solutions-heading">
-      <h2 id="solutions-heading">What You Can Do</h2>
-      <p>Individual actions collectively make a significant impact. Here are some ways you can help:</p>
-      <ul style="margin-left: 20px; margin-bottom: 20px;">
-        <li style="margin-bottom: 8px;">Reduce your carbon footprint by using public transportation or biking</li>
-        <li style="margin-bottom: 8px;">Conserve energy at home with efficient appliances and lighting</li>
-        <li style="margin-bottom: 8px;">Support sustainable businesses and products</li>
-        <li style="margin-bottom: 8px;">Reduce, reuse, and recycle to minimize waste</li>
-        <li style="margin-bottom: 8px;">Advocate for climate policies in your community</li>
-      </ul>
-    </section>
-  </main>
+    <footer>
+        <p>&copy; 2025 Climate Crisis Awareness | <a href="#" style="color: #fff;">Privacy Policy</a> | <a href="#"
+                style="color: #fff;">Accessibility</a></p>
+    </footer>
 
-  <footer role="contentinfo">
-    <p>&copy; 2025 Climate Crisis Awareness | <a href="#" style="color: var(--text-light);">Privacy Policy</a> | <a href="#" style="color: var(--text-light);">Accessibility Statement</a></p>
-  </footer>
+    <script>
+        const header = document.getElementById('header');
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        const updateHeader = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                header.classList.add('compact');
+            } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+                header.classList.remove('compact');
+            }
+
+            lastScrollY = currentScrollY;
+            ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeader);
+                ticking = true;
+            }
+        });
+
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('show');
+        }
+
+        const slideshow = document.getElementById('slideshow');
+        let scrollPos = 0;
+        setInterval(() => {
+            scrollPos += 320;
+            if (scrollPos >= slideshow.scrollWidth - slideshow.clientWidth) {
+                scrollPos = 0;
+            }
+            slideshow.scrollTo({ left: scrollPos, behavior: 'smooth' });
+        }, 3000);
+    </script>
 </body>
+
 </html>

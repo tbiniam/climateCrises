@@ -120,33 +120,36 @@ header.compact .header-bottom {
 }
 
 nav ul{
+    justify-content: center;
     display: none;
     flex-direction: column;
+    list-style: none;
     position: absolute;
     top: 70px;
     right: 20px;
+    transition: var(--trans);
     background-color: var(--dark);
     padding: 10px 15px;
     border-radius: var(--radius);
     z-index: 1000;
-}
-
-nav ul.show{
-    display: flex;
     
 }
 
 @media(min-width: 768px){
     nav ul{
-        display: flex;
+        display: flex !important;
         flex-direction: row;
         position: static;
         background-color: transparent;
         padding: 0;
         
     }
-    nav ul li{
-        margin: 0 15px;
+    .nav ul.show{
+        display: flex;
+        flex-direction: row;
+        position: static;
+        background-color: transparent;
+        padding: 0;
     }
     .hamburger{
         display: none;
@@ -228,14 +231,6 @@ nav ul.show{
     width: 100%;
 }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    justify-content: center;
-    gap: 15px;
-    transition: var(--trans);
-}
-
 nav a {
     color: var(--light);
     text-decoration: none;
@@ -265,7 +260,7 @@ nav a.active {
 }
 
 main {
-    max-width: 1000px;
+    max-width: 1350px;
     margin: 50px auto;
     padding: 40px;
     background: var(--light);
@@ -351,18 +346,26 @@ p, li {
     box-shadow: 0 8px 30px rgba(46, 125, 50, 0.3);
 }
 
-footer {
+.hidden-footer {
     text-align: center;
-    padding: 20px;
+    left: 0;
+    padding: 15px;
     background-image: url('https://images.unsplash.com/photo-1476231682828-37e571bc172f?q=80&w=2748&auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center; 
     color: var(--light);
     position: fixed;
+    transition: bottom 0.4s ease;
     width: 100%;
-    bottom: 0;
-    margin-top: 50px;
+    height: 100px; 
+    bottom: -100px; 
 }
+
+.hidden-footer.visible {
+    bottom: 0;
+    transition: bottom 0.3s ease;
+}
+
 
 .footer-link {
     color: var(--light);

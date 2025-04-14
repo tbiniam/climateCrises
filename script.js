@@ -2,7 +2,6 @@ const slide1 = document.getElementById('slide1');
 const slide2 = document.getElementById('slide2');
 const intro = document.getElementById('intro');
 const header = document.getElementById('header');
-const mainContent = document.querySelector('.main-content');
 const slideshow = document.getElementById('slideshow');
 const modal = document.getElementById('newsletter-modal');
 const form = document.getElementById('newsletter-form');
@@ -71,14 +70,9 @@ function toggleMenu() {
     }
 }
 
-document.addEventListener('click', (e) => {
-    const nav = document.querySelector('nav ul');
-    const hamburger = document.querySelector('.hamburger');
-    
-    if (!e.target.closest('nav') && !e.target.closest('.hamburger') && nav.classList.contains('show')) {
-        toggleMenu();
-    }
-});
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+  });
 
 profileIcon.addEventListener('mouseenter', () => {
     profileIcon.style.transform = 'scale(1.1) rotate(5deg)';
@@ -99,6 +93,17 @@ setInterval(() => {
     slideshow.scrollTo({ left: scrollPos, behavior: 'smooth' });
 }, 3000);
 
+const footer = document.getElementById('scroll-footer');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+
+  if (scrollY > 200) {
+    footer.classList.add('visible');
+  } else {
+    footer.classList.remove('visible');
+  }
+});
 
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
